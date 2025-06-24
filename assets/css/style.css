@@ -1,15 +1,16 @@
 /* SF PRO Display Font face import */
-@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&display=swap");
 
 :root {
-    --primary: #E500AC;
-    --gray: #F7F7F7;
-    --bg-color: #FEF6EA;
-    --white: #ffffff;
-    --round-1: 8px;
-    --round-2: 20px;
-    --round-3: 30px;
-    --round-full: 100%;
+  --primary: #e500ac;
+  --primary-dark: #c50094;
+  --gray: #f7f7f7;
+  --bg-color: #fef6ea;
+  --white: #ffffff;
+  --round-1: 8px;
+  --round-2: 20px;
+  --round-3: 30px;
+  --round-full: 100%;
 }
 * {
   padding: 0;
@@ -22,73 +23,119 @@ html {
 }
 
 a {
-    text-decoration: none!important;
+  text-decoration: none !important;
 }
 body {
-    background-color: var(--bg-color);
+  background-color: var(--bg-color);
+}
+.primary {
+  color: var(--primary);
+}
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--round-full);
 }
 .form-container {
-    position: fixed;
-    bottom: 20px;
-    left: 0;
-    width: 75%;
-    margin: auto;
-    right: 0;
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  width: 75%;
+  margin: auto;
+  right: 0;
 }
 .plus-sign {
-    background-color: var(--white);
-    padding: 20px;
-    border-radius: var(--round-full);
-    width: 80px;
-    height: 80px;
-    display: inline;
-    font-size: 18px;
-    font-weight: 700;
+  background-color: var(--white);
+  padding: 20px;
+  border-radius: var(--round-full);
+  width: 80px;
+  height: 70px;
+  display: inline;
+  font-size: 18px;
+  font-weight: 700;
 }
 .input-field {
-    background-color: var(--white);
-    border-radius: var(--round-3);
-    border: none;
-    padding: 25px 18px;
-    width: 100%;
-    height: 80px;
+  background-color: var(--white);
+  border-radius: var(--round-3);
+  border: none;
+  padding: 20px 18px;
+  width: 100%;
+  height: 70px;
+}
+.input-field:focus {
+    outline: none;
 }
 .submit-btn {
-    border: none;
-    background-color: var(--primary);
-    color: var(--white);
-    border-radius: var(--round-full);
-    /* height: 50px;
+  border: none;
+  background-color: var(--primary);
+  color: var(--white);
+  border-radius: var(--round-full);
+  /* height: 50px;
     width: 50px; */
-    padding: 12px;
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+  padding: 12px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 #button-container {
-    position: fixed;
-    bottom: 20px;
-    right: 0;
-    left: 0;
-    width: 90%;
-    margin: auto;
+  position: fixed;
+  bottom: 20px;
+  right: 0;
+  left: 0;
+  width: 90%;
+  margin: auto;
 }
-.secondary-btn, .primary-btn {
-    padding: 15px 20px;
-    border-radius: var(--round-3);
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-    font-weight: 600;
-    font-size: 1rem;
-    text-decoration: none;
-    margin: 0 5px;
+.secondary-btn,
+.primary-btn {
+  padding: 15px 20px;
+  border-radius: var(--round-3);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 5px;
 }
 .secondary-btn {
-    background-color: var(--white);
-    color: var(--primary);
+  background-color: var(--white);
+  color: var(--primary);
 }
 .primary-btn {
-    color: var(--white);
-    background-color: var(--primary);
+  color: var(--white);
+  background-color: var(--primary);
+}
+.primary-btn:hover {
+    background-color: var(--primary-dark);
+    color: white;
+}
+.form-row {
+  margin: 12px 0;
+}
+
+.info-card {
+  text-align: center;
+  background-color: var(--gray);
+  border-radius: var(--round-1);
+  padding: 20px;
+  cursor: pointer;
+}
+.info-card > * {
+  margin: 10px 0;
+}
+
+#select-role {
+  position: absolute;
+  z-index: 100000;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
