@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <body>
+    <?php require __DIR__ . '/../components/navbar.php'; ?>
     <main class="container-fluid py-5">
         <div class="container text-center mt-5">
             <h3 class="display-4 fw-bold gradient-text">Login to your account</h1>

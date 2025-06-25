@@ -3,21 +3,12 @@ $user = [
     "name" => "M Shehu",
     "username" => "Shehu",
     "email" => "shehu@gmail.com",
-    "registration_status" => "incomplete",
+    "registration_status" => "complete",
 ]
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cerebro</title>
-    <link rel="stylesheet" href="/cerebro/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/cerebro/assets/css/style.css">
-</head>
-
+<?php require __DIR__ . '/../components/header.php'; ?>
 <body>
+    <?php require __DIR__ . '/../components/dashboard-navbar.php'; ?>
     <main>
         <?php
         if ($user['registration_status'] != 'complete') {
@@ -102,8 +93,8 @@ $user = [
         <?php
         }
         ?>
-        <section class="my-5 d-none">
-            <h1 class="text-center fw-bold">How may I assist you today?</h1>
+        <section class="my-5">
+            <h1 class="text-center fw-bold mt-5">How may I assist you today?</h1>
         </section>
         <section class="form-container">
             <form action="">
