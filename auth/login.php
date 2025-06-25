@@ -1,18 +1,13 @@
 <?php
 session_start();
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../util/utilities.php';
 require __DIR__ . '/../components/header.php';
 
 
 $success = '';
 if (isset($_GET['success']) && $_GET['success'] == 'true') {
     $success = "Registration Successful. Please log in.";
-}
-
-// Helper function to sanitize input
-function clean_input($data)
-{
-    return htmlspecialchars(trim($data));
 }
 
 $error = '';

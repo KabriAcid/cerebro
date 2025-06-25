@@ -1,12 +1,7 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../util/utilities.php';
 require __DIR__ . '/../components/header.php';
-
-// Helper function to sanitize input
-function clean_input($data)
-{
-    return htmlspecialchars(trim($data));
-}
 
 $error = '';
 $success = '';

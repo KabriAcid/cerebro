@@ -1,3 +1,5 @@
+<?php require __DIR__ . '/../config/database.php'; ?>
+<?php require __DIR__ . '/../util/utilities.php'; ?>
 <?php
 $user = [
     "name" => "M Shehu",
