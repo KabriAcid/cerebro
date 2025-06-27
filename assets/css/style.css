@@ -35,9 +35,16 @@ body {
   width: 45px;
   height: 45px;
 }
+/* Dropdown Container Styling */
+.dropdown-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
 /* Avatar Styling */
 .avatar-container {
-  position: relative;
   display: inline-block;
 }
 
@@ -58,9 +65,20 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: var(--round-2);
   z-index: 1000;
-  width: 200px;
+  width: 250px;
+  overflow: hidden;
 }
 
+/* Dropdown Header Styling */
+.dropdown-header {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--gray);
+  font-size: 0.9rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+/* Dropdown Item Styling */
 .dropdown-item {
   padding: 10px 15px;
   text-decoration: none;
@@ -74,7 +92,6 @@ body {
   background-color: var(--gray);
   color: var(--primary);
 }
-
 .nav-link.active {
   color: var(--primary) !important;
   font-weight: 600;
