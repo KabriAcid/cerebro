@@ -100,11 +100,21 @@ $user = [
             <h1 class="text-center fw-bold mt-5">How may I assist you today?</h1>
         </section>
         <section class="form-container">
-            <form action="">
-                <!-- <span class="plus-sign">&plus;</span> -->
-                <div class="position-relative">
-                    <input type="text" class="input-field" placeholder="Type message here">
-                    <button type="submit" class="submit-btn"><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div class="position-relative d-flex align-items-center">
+                    <!-- Upload Media Button -->
+                    <button type="button" class="upload-media-btn" title="Upload Media">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 16V8M8 12H16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+
+                    <!-- Input Field -->
+                    <input type="text" class="input-field" placeholder="Type message here" name="message">
+
+                    <!-- Upload Button Inside Input -->
+                    <button type="submit" class="submit-btn">
+                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M21.1525 1.55322L10.1772 19.0044L8.50684 10.4078L1 5.89796L21.1525 1.55322ZM21.1525 1.55322L8.45564 10.4437" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </button>
@@ -112,6 +122,7 @@ $user = [
             </form>
         </section>
     </main>
+    <script src="../assets/js/ajax.js"></script>
 </body>
 
 </html>
