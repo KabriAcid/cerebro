@@ -1,101 +1,57 @@
-<?php require __DIR__ . '/../config/database.php'; ?>
-<?php require __DIR__ . '/../util/utilities.php'; ?>
 <?php
-$user = [
-    "name" => "M Shehu",
-    "username" => "Shehu",
-    "email" => "shehu@gmail.com",
-    "registration_status" => "complete",
-]
+session_start();
+require __DIR__ . '/../config/database.php';
+require __DIR__ . '/../util/utilities.php';
+
+$user = get_user_info($pdo, $user_id);
 ?>
 <?php require __DIR__ . '/../components/header.php'; ?>
 
 <body>
     <?php require __DIR__ . '/../components/dashboard-navbar.php'; ?>
     <main>
-        <?php
-        if ($user['registration_status'] != 'complete') {
-        ?>
-            <section class="my-5" id="select-role">
-                <div class="container" style="max-width: 600px;">
-                    <div class="card p-3 border-0 rounded mt-5">
-                        <div class="card-body">
-                            <div class="mb-5">
-                                <h2 class="primary">What is your role?</h2>
-                                <p class="text-secondary">Select what best describes you.</p>
-                            </div>
-                            <div class="row mb-3">
-                                <!-- Card -->
-                                <div class="col-6">
-                                    <div class="info-card">
-                                        <div>
-                                            <svg width="32" height="30" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M21.1525 1.55322L10.1772 19.0044L8.50684 10.4078L1 5.89796L21.1525 1.55322ZM21.1525 1.55322L8.45564 10.4437" stroke="#141C25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <h6 class="text-secondary fw-bold">Student</h6>
-                                        </div>
-
+        <?php if ($user['registration_status'] != 'complete'): ?>
+            <!-- Modal -->
+            <div class="modal" id="roleModal" tabindex="-1" style="display: block; background-color: rgba(0, 0, 0, 0.5);">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content" style="border-radius: var(--round-3);">
+                        <div class="modal-header" style="border-bottom: none;">
+                            <h5 class="modal-title text-center w-100">Select Your Career</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-center text-secondary">Please select the career that best describes you:</p>
+                            <div class="row">
+                                <!-- Career Cards -->
+                                <div class="col-6 mb-3">
+                                    <div class="info-card text-center p-3" onclick="selectRole('Software Engineer')">
+                                        <h6 class="fw-bold">Software Engineer</h6>
                                     </div>
                                 </div>
-                                <!-- Card -->
-                                <div class="col-6">
-                                    <div class="info-card">
-                                        <div>
-                                            <svg width="30" height="30" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 17V16C1 12.134 4.13401 9 8 9M15 17V16C15 12.134 11.866 9 8 9M8 9C10.2091 9 12 7.20914 12 5C12 2.79086 10.2091 1 8 1C5.79086 1 4 2.79086 4 5C4 7.20914 5.79086 9 8 9Z" stroke="#141C25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-
-                                        </div>
-                                        <div>
-                                            <h6 class="text-secondary fw-bold">Teacher</h6>
-                                        </div>
-
+                                <div class="col-6 mb-3">
+                                    <div class="info-card text-center p-3" onclick="selectRole('Data Scientist')">
+                                        <h6 class="fw-bold">Data Scientist</h6>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="info-card text-center p-3" onclick="selectRole('Product Manager')">
+                                        <h6 class="fw-bold">Product Manager</h6>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="info-card text-center p-3" onclick="selectRole('UI/UX Designer')">
+                                        <h6 class="fw-bold">UI/UX Designer</h6>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <!-- Card -->
-                                <div class="col-6">
-                                    <div class="info-card">
-                                        <div>
-                                            <svg width="32" height="30" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M21.1525 1.55322L10.1772 19.0044L8.50684 10.4078L1 5.89796L21.1525 1.55322ZM21.1525 1.55322L8.45564 10.4437" stroke="#141C25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <h6 class="text-secondary fw-bold">Student</h6>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <!-- Card -->
-                                <div class="col-6">
-                                    <div class="info-card">
-                                        <div>
-                                            <svg width="32" height="30" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M21.1525 1.55322L10.1772 19.0044L8.50684 10.4078L1 5.89796L21.1525 1.55322ZM21.1525 1.55322L8.45564 10.4437" stroke="#141C25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <h6 class="text-secondary fw-bold">Student</h6>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Button -->
-                            <div class="text-end mt-5">
-                                <button id="submit-role" style="background-color: #e500ac;border-radius:4px;" class="border-0 text-white fw-bold py-2 px-4 d-block">Done</button>
-                            </div>
+                        </div>
+                        <div class="modal-footer" style="border-top: none;">
+                            <button class="btn mini-btn w-100" onclick="submitRole()">Submit</button>
                         </div>
                     </div>
                 </div>
-            </section>
-        <?php
-        }
-        ?>
+            </div>
+        <?php endif; ?>
+
         <section class="my-5">
             <h1 class="text-center fw-bold mt-5">How may I assist you today?</h1>
         </section>
@@ -123,6 +79,7 @@ $user = [
         </section>
     </main>
     <script src="../assets/js/ajax.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
 </body>
 
 </html>

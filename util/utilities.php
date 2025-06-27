@@ -1,4 +1,10 @@
 <?php
+if(isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+} else {
+    $user_id = null; // Default to null if not set
+}
+
 function set_title(string $title = 'Cerebro')
 {
     if (isset($title)) {
