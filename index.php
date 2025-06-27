@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/util/utiliities.php';
+require __DIR__ . '/util/utilities.php';
 $user = [
     "name" => "M Shehu",
     "username" => "Shehu",
@@ -33,22 +33,32 @@ $user = [
 
 <body>
     <header>
-        <nav class="container-fluid navbar-fixed navbar-top p-4">
-            <div class="d-flex justify-content-between">
-                <a href="index.php">
-                    <img src="assets/img/logo.png" class="favicon">
+        <nav class="navbar navbar-expand-lg navbar-white bg-white shadow-sm" id="mainNavbar">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.php">
+                    <img src="assets/img/logo.png" class="favicon" alt="Logo">
                 </a>
-                <ul class="nav-links">
-                    <li>Home</li>
-                    <li>Contact</li>
-                    <li>About</li>
-                </ul>
-                <span></span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active font-weight-bold" href="index.php">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-bold" href="#contact">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-bold" href="#about">About</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
     <main>
-        <section class="py-5 text-center">
+        <section class="py-5 text-center mt-5">
             <h1>Smart AI companion for anytime assistance</h1>
             <p class="text-secondary">Your smart AI companion, ready to assist with mental health conditions, keeping you <br> informed and engaged anytime, anywhere you go.</p>
         </section>

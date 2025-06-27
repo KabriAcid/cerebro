@@ -44,6 +44,10 @@ body {
   height: 45px;
   border-radius: var(--round-full);
 }
+.nav-link.active {
+  color: var(--primary)!important;
+  font-weight: 600;
+}
 .form-container {
   position: fixed;
   bottom: 20px;

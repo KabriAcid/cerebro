@@ -8,32 +8,24 @@ $success = '';
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username     = clean_input($_POST['username'] ?? '');
-    $email    = clean_input($_POST['email'] ?? '');
-    $phone    = clean_input($_POST['phone'] ?? '');
+    $username = clean_input($_POST['username'] ?? '');
+    $email = clean_input($_POST['email'] ?? '');
+    $phone = clean_input($_POST['phone'] ?? '');
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
 
     if ($password != $confirm_password) {
-        $error .= 'Passwords do not match';
-        exit;
-    }
-
-    if (strlen($phone) <= 10) {
-        $error .= 'Phone Number is too short';
-        exit;
-    }
-
-    // Basic validation
-    if (!$username || !$email || !$phone || !$password) {
-        $error = "All fields are required.";
-        exit;
+        $error = 'Passwords do not match.';
+    } elseif (strlen($phone) <= 10) {
+        $error = 'Phone number is too short.';
+    } elseif (!$username || !$email || !$phone || !$password) {
+        $error = 'All fields are required.';
     } else {
         // Check if email or phone already exists
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? OR phone = ?");
         $stmt->execute([$email, $phone]);
         if ($stmt->fetch()) {
-            $error = "Email or phone already exists.";
+            $error = 'Email or phone already exists.';
         } else {
             // Hash password with md5 (for legacy compatibility)
             $hashed_password = md5($password);
@@ -43,9 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $result = $stmt->execute([$username, $email, $phone, $hashed_password]);
 
             if (!$result) {
-                $error = "Registration failed. Please try again.";
+                $error = 'Registration failed. Please try again.';
             } else {
                 header("Location: login.php?success=true");
+                exit;
             }
         }
     }
@@ -73,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="form-row">
                         <input type="tel" class="input-field" id="phone" name="phone" placeholder="Phone Number" required maxlength="15">
                     </div>
-
                     <div class="form-row">
                         <input type="password" class="input-field" id="password" name="password" placeholder="Password" required minlength="6">
                     </div>
