@@ -52,9 +52,10 @@ $user = get_user_info($pdo, $user_id);
             </div>
         <?php endif; ?>
 
-        <section class="my-5">
-            <h1 class="text-center fw-bold mt-5">How may I assist you today?</h1>
+        <section class="intro-section">
+            <h1 class="text-center fw-bold">How may I assist you today?</h1>
         </section>
+        <!-- Form container -->
         <section class="form-container">
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="position-relative d-flex align-items-center">

@@ -2,7 +2,7 @@
 <header class="dashboard-navbar" style="position: relative;">
     <div class="dropdown-container">
         <div class="avatar-container">
-            <img src="../assets/img/avatar.png" alt="Avatar" class="avatar" onclick="toggleDropdown()" />
+            <img src="../assets/img/avatar.jpg" alt="Avatar" class="avatar" onclick="toggleDropdown()" />
         </div>
         <div class="dropdown-menu" id="avatarDropdown">
             <div class="dropdown-header">
