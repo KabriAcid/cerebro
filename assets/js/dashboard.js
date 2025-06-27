@@ -1,4 +1,4 @@
-let selectedRole = "";
+let selectedCareer = "";
 
 // Set the first card as active by default
 document.addEventListener("DOMContentLoaded", () => {
@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-function selectCareer(role) {
-  selectedRole = role;
+function selectCareer(career) {
+  selectedCareer = career;
 
   // Highlight the selected card
   const cards = document.querySelectorAll(".info-card");
@@ -19,7 +19,7 @@ function selectCareer(role) {
   });
 
   const selectedCard = Array.from(cards).find(card =>
-    card.textContent.includes(role)
+    card.textContent.includes(career)
   );
   if (selectedCard) {
     selectedCard.style.border = `2px solid var(--primary)`;
@@ -28,19 +28,19 @@ function selectCareer(role) {
 }
 
 function submitCareer() {
-  if (!selectedRole) {
+  if (!selectedCareer) {
     alert("Please select a career before submitting.");
     return;
   }
 
   sendAjaxRequest(
-    "../api/update-role.php",
+    "../api/update-career.php",
     "POST",
-    { role: selectedRole },
+    { career: selectedCareer },
     function (response) {
       if (response.success) {
         // Hide the modal
-        const modal = document.getElementById("roleModal");
+        const modal = document.getElementById("careerModal");
         if (modal) {
           modal.style.display = "none";
         }
