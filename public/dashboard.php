@@ -23,29 +23,29 @@ $user = get_user_info($pdo, $user_id);
                             <div class="row">
                                 <!-- Career Cards -->
                                 <div class="col-6 mb-3">
-                                    <div class="info-card text-center p-3" onclick="selectRole('Software Engineer')">
+                                    <div class="info-card text-center p-3" onclick="selectCareer('Software Engineer')">
                                         <h6 class="fw-bold">Software Engineer</h6>
                                     </div>
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <div class="info-card text-center p-3" onclick="selectRole('Data Scientist')">
+                                    <div class="info-card text-center p-3" onclick="selectCareer('Data Scientist')">
                                         <h6 class="fw-bold">Data Scientist</h6>
                                     </div>
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <div class="info-card text-center p-3" onclick="selectRole('Product Manager')">
+                                    <div class="info-card text-center p-3" onclick="selectCareer('Product Manager')">
                                         <h6 class="fw-bold">Product Manager</h6>
                                     </div>
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <div class="info-card text-center p-3" onclick="selectRole('UI/UX Designer')">
+                                    <div class="info-card text-center p-3" onclick="selectCareer('UI/UX Designer')">
                                         <h6 class="fw-bold">UI/UX Designer</h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer" style="border-top: none;">
-                            <button class="btn mini-btn w-100" onclick="submitRole()">Submit</button>
+                            <button class="btn mini-btn w-100" onclick="submitCareer()">Submit</button>
                         </div>
                     </div>
                 </div>

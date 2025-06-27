@@ -4,11 +4,11 @@ let selectedRole = "";
 document.addEventListener("DOMContentLoaded", () => {
   const firstCard = document.querySelector(".info-card");
   if (firstCard) {
-    selectRole(firstCard.textContent.trim());
+    selectCareer(firstCard.textContent.trim());
   }
 });
 
-function selectRole(role) {
+function selectCareer(role) {
   selectedRole = role;
 
   // Highlight the selected card
@@ -27,7 +27,7 @@ function selectRole(role) {
   }
 }
 
-function submitRole() {
+function submitCareer() {
   if (!selectedRole) {
     alert("Please select a career before submitting.");
     return;

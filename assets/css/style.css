@@ -208,3 +208,40 @@ body {
   display: flex;
   align-items: center;
 }
+
+/* Modal Styling */
+.modal-content {
+  border-radius: var(--round-3);
+  padding: 20px;
+  background-color: var(--white);
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-footer {
+  border-top: none;
+}
+
+/* Info Card Styling */
+.info-card {
+  text-align: center;
+  background-color: var(--gray);
+  border-radius: var(--round-2);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid var(--gray);
+}
+
+.info-card:hover {
+  border: 2px solid var(--primary);
+  background-color: var(--white);
+}
+
+/* Selected Card Styling */
+.info-card.selected {
+  border: 2px solid var(--primary);
+  background-color: var(--gray);
+}
