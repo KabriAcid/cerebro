@@ -9,6 +9,7 @@ $user = [
 ]
 ?>
 <?php require __DIR__ . '/../components/header.php'; ?>
+
 <body>
     <?php require __DIR__ . '/../components/dashboard-navbar.php'; ?>
     <main>
