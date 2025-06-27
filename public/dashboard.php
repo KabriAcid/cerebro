@@ -12,7 +12,7 @@ $user = get_user_info($pdo, $user_id);
     <main>
         <?php if ($user['registration_status'] != 'complete'): ?>
             <!-- Modal -->
-            <div class="modal" id="roleModal" tabindex="-1" style="display: block; background-color: rgba(0, 0, 0, 0.5);">
+            <div class="modal" id="careerModal" tabindex="-1" style="display: block; background-color: rgba(0, 0, 0, 0.5);">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content" style="border-radius: var(--round-3);">
                         <div class="modal-header" style="border-bottom: none;">
