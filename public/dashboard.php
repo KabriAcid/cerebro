@@ -80,6 +80,7 @@ $user = get_user_info($pdo, $user_id);
     </main>
     <script src="../assets/js/ajax.js"></script>
     <script src="../assets/js/dashboard.js"></script>
+    <script src="../assets/js/script.js"></script>
 </body>
 
 </html>
