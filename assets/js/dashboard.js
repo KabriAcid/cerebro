@@ -68,9 +68,16 @@ function submitPrompt() {
     return;
   }
 
-  // Hide intro text and show loader
+  // Append the user's message to the response container
+  const userMessage = document.createElement("div");
+  userMessage.className = "response-message";
+  userMessage.innerHTML = `<p class="text-secondary"><strong>You:</strong> ${userPrompt}</p>`;
+  responseContainer.appendChild(userMessage);
+
+  // Show loader and keep the button active
   introText.style.display = "none";
   loader.style.display = "block";
+  responseContainer.style.display = "block";
 
   // Send AJAX request using the custom AJAX function
   sendAjaxRequest(
@@ -79,26 +86,24 @@ function submitPrompt() {
     { message: userPrompt },
     function (response) {
       loader.style.display = "none"; // Hide loader
-      responseContainer.style.display = "block"; // Show response container
 
-      if (response.success) {
-        responseMessage.innerHTML = `<p class="text-primary">${response.message}</p>`;
-      } else {
-        responseMessage.innerHTML = `<p class="text-danger">${response.message}</p>`;
-      }
+      // Append the chatbot's response to the response container
+      const botMessage = document.createElement("div");
+      botMessage.className = "response-message";
+      botMessage.innerHTML = `<p class="text-primary"><strong>Bot:</strong> ${response.message}</p>`;
+      responseContainer.appendChild(botMessage);
+
+      // Clear the input field for the next message
+      document.getElementById("userPrompt").value = "";
     },
     function (error) {
       loader.style.display = "none"; // Hide loader
-      responseContainer.style.display = "block"; // Show response container
 
-      // Display detailed error message
-      if (typeof error === "object") {
-        responseMessage.innerHTML = `<p class="text-danger">An error occurred: ${JSON.stringify(
-          error
-        )}</p>`;
-      } else {
-        responseMessage.innerHTML = `<p class="text-danger">An error occurred: ${error}</p>`;
-      }
+      // Append the error message to the response container
+      const errorMessage = document.createElement("div");
+      errorMessage.className = "response-message";
+      errorMessage.innerHTML = `<p class="text-danger"><strong>Error:</strong> ${error}</p>`;
+      responseContainer.appendChild(errorMessage);
     }
   );
 }

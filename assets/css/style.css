@@ -347,7 +347,9 @@ body {
   margin-top: 20px;
   padding: 20px;
   max-width: 600px;
+  width: 100%;
   background-color: var(--white);
+  border-radius: var(--round-1);
 }
 
 .response-message {
