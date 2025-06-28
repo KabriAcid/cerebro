@@ -28,15 +28,15 @@ try {
     }
 
     // Chat message history
-    $messages = [
-        ["role" => "system", "content" => "You are a compassionate mental health assistant."],
-        ["role" => "user", "content" => $userPrompt],
-    ];
+    $messages = getDefaultMentalHealthPrompt($userPrompt);
+
 
     // Payload
     $payload = [
-        "model" => "moonshotai/kimi-vl-a3b-thinking:free",
+        "model" => "mistralai/mistral-7b-instruct:free",
         "messages" => $messages,
+        "temperature" => 0.9,
+        "max_tokens" => 512
     ];
 
     // Initialize cURL
