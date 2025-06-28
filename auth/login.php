@@ -79,6 +79,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </main>
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Show the loader overlay
+            const loaderOverlay = document.getElementById('loaderOverlay');
+            loaderOverlay.classList.remove('d-none');
+
+            // Simulate a delay before redirecting
+            setTimeout(() => {
+                this.submit(); // Submit the form after the delay
+            }, 2000); // 2-second delay
+        });
+    </script>
 </body>
 
 </html>
