@@ -35,7 +35,7 @@ try {
 
     // Payload
     $payload = [
-        "model" => "moonshot/moonshot-v1-128k:free", // Model ID for Moonshot AI
+        "model" => "moonshotai/kimi-vl-a3b-thinking:free",
         "messages" => $messages,
     ];
 

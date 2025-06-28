@@ -8,14 +8,14 @@ require __DIR__ . '/../util/utilities.php';
 
 <body>
     <?php require __DIR__ . '/../components/dashboard-navbar.php'; ?>
-    <main>
+    <main class="container-fluid">
         <section class="intro-section" id="introText">
             <h1 class="text-center fw-bold">How may I assist you today?</h1>
         </section>
 
         <!-- Loader -->
         <div class="loader" id="loader" style="display: none;"></div>
-        
+
         <!-- Chat container -->
         <section class="chat-container" id="chatContainer">
             <!-- Messages will be dynamically appended here -->
@@ -34,7 +34,7 @@ require __DIR__ . '/../util/utilities.php';
                     </svg>
                 </button>
             </div>
-            <p class="text-xs text-secondary my-3 text-center">This chatbot is not a substitute for professional help.</p>
+            <p id="info-text">This chatbot is not a substitute for professional help.</p>
         </section>
     </main>
     <script src="../assets/js/ajax.js"></script>

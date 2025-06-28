@@ -3,6 +3,7 @@
 :root {
   --primary: #e500ac;
   --primary-dark: #c50094;
+  --dark: #777777;
   --gray: #f7f7f7;
   --bg-color: #fef6ea;
   --white: #ffffff;
@@ -99,7 +100,7 @@ body {
   position: fixed;
   bottom: 20px;
   left: 0;
-  width: 75%;
+  width: 90%;
   margin: auto;
   right: 0;
 }
@@ -330,7 +331,6 @@ body {
   width: 100%;
   background-color: var(--gray-light);
   border-radius: var(--round-3);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   height: 70vh; /* Set height for scrolling */
 }
@@ -340,7 +340,7 @@ body {
   background-color: var(--primary);
   color: var(--white);
   padding: 10px 15px;
-  border-radius: var(--round-3);
+  border-radius: 8px 8px 0 8px;
   margin: 10px 0;
   max-width: 80%;
   align-self: flex-end;
@@ -352,7 +352,7 @@ body {
   background-color: var(--white);
   color: var(--black);
   padding: 10px 15px;
-  border-radius: var(--round-3);
+  border-radius: var(--round-1);
   margin: 10px 0;
   max-width: 80%;
   align-self: flex-start;
@@ -362,7 +362,7 @@ body {
 /* Loader Styling */
 .loader {
   border: 4px solid var(--gray);
-  border-top: 4px solid var(--primary);
+  border-top: 3px solid var(--primary);
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -377,4 +377,14 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+#info-text {
+  color: var(--dark);
+  font-size: 0.75rem;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  text-align: center;
+
 }
