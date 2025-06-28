@@ -55,3 +55,50 @@ function submitCareer() {
     }
   );
 }
+
+function submitPrompt() {
+  const userPrompt = document.getElementById("userPrompt").value.trim();
+  const introText = document.getElementById("introText");
+  const loader = document.getElementById("loader");
+  const responseContainer = document.getElementById("responseContainer");
+  const responseMessage = document.getElementById("responseMessage");
+
+  if (!userPrompt) {
+    alert("Please enter a message.");
+    return;
+  }
+
+  // Hide intro text and show loader
+  introText.style.display = "none";
+  loader.style.display = "block";
+
+  // Send AJAX request using the custom AJAX function
+  sendAjaxRequest(
+    "../api/chat.php",
+    "POST",
+    { message: userPrompt },
+    function (response) {
+      loader.style.display = "none"; // Hide loader
+      responseContainer.style.display = "block"; // Show response container
+
+      if (response.success) {
+        responseMessage.innerHTML = `<p class="text-primary">${response.message}</p>`;
+      } else {
+        responseMessage.innerHTML = `<p class="text-danger">${response.message}</p>`;
+      }
+    },
+    function (error) {
+      loader.style.display = "none"; // Hide loader
+      responseContainer.style.display = "block"; // Show response container
+
+      // Display detailed error message
+      if (typeof error === "object") {
+        responseMessage.innerHTML = `<p class="text-danger">An error occurred: ${JSON.stringify(
+          error
+        )}</p>`;
+      } else {
+        responseMessage.innerHTML = `<p class="text-danger">An error occurred: ${error}</p>`;
+      }
+    }
+  );
+}
