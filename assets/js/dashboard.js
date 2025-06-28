@@ -3,7 +3,6 @@ function autoResize(textarea) {
   textarea.style.height = textarea.scrollHeight + "px";
 }
 
-
 let selectedCareer = "";
 
 // Set the first card as active by default
@@ -70,7 +69,6 @@ document.getElementById("userPrompt").addEventListener("keydown", function (e) {
   }
 });
 
-
 function submitPrompt() {
   const userPromptEl = document.getElementById("userPrompt");
   const chatContainer = document.getElementById("chatContainer");
@@ -82,11 +80,18 @@ function submitPrompt() {
   // Hide intro text if visible
   if (introText) introText.style.display = "none";
 
+  // Clear the input field immediately
+  userPromptEl.value = "";
+  autoResize(userPromptEl);
+
   // Append user's message
   const userMsg = document.createElement("div");
   userMsg.className = "user-message mb-2 p-2 rounded shadow-sm";
   userMsg.textContent = userPrompt;
   chatContainer.appendChild(userMsg);
+
+  // Scroll to bottom immediately after appending user's message
+  scrollToBottom();
 
   // Simulate typing bot response
   const typing = document.createElement("div");
@@ -94,10 +99,9 @@ function submitPrompt() {
   typing.innerHTML = `<em>Typing...</em>`;
   chatContainer.appendChild(typing);
 
-  // Scroll to bottom
+  // Scroll to bottom after appending typing indicator
   scrollToBottom();
 
-  // AJAX request
   sendAjaxRequest(
     "../api/chat.php",
     "POST",
@@ -106,41 +110,38 @@ function submitPrompt() {
       // Remove typing indicator
       chatContainer.removeChild(typing);
 
-      // Append bot's response
+      // Create bot message container
       const botMsg = document.createElement("div");
-      botMsg.className = "bot-message mb-2 p-2 rounded shadow-sm";
-      botMsg.innerHTML = response.message || "No response.";
+      botMsg.className = "bot-message mb-5 p-2 rounded shadow-sm";
+
+      // Use marked.js to render markdown safely
+      try {
+        botMsg.innerHTML = marked.parse(response.message || "No response.");
+      } catch (error) {
+        botMsg.textContent = response.message || "No response.";
+      }
+
       chatContainer.appendChild(botMsg);
 
-      // Add spacing below the last response
+      // Add spacer
       const spacer = document.createElement("div");
       spacer.style.height = "20px";
       chatContainer.appendChild(spacer);
 
-      // Clear the input field
-      userPromptEl.value = "";
-      autoResize(userPromptEl);
-      userPromptEl.focus();
-
-      // Scroll to bottom
       scrollToBottom();
     },
     function (error) {
-      // Remove typing indicator
       chatContainer.removeChild(typing);
 
-      // Append error message
       const errorMsg = document.createElement("div");
       errorMsg.className = "bot-message text-danger";
       errorMsg.textContent = "An error occurred: " + error;
       chatContainer.appendChild(errorMsg);
 
-      // Add spacing below the last response
       const spacer = document.createElement("div");
       spacer.style.height = "20px";
       chatContainer.appendChild(spacer);
 
-      // Scroll to bottom
       scrollToBottom();
     }
   );
