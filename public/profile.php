@@ -124,6 +124,9 @@ $user = get_user_info($pdo, $_SESSION['user_id'] ?? null);
         <button class="btn btn-danger mt-3" onclick="updateModalContent('closeAccount')">Close Account</button>
     </div>
 
+    <script src="../assets/js/ajax.js"></script>
+    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
     <script>
         function openCustomModal(modalId) {
             const modalContent = document.getElementById(modalId).innerHTML;

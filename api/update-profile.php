@@ -1,4 +1,3 @@
-<!-- filepath: c:\xampp\htdocs\cerebro\api\update-profile.php -->
 <?php
 session_start();
 require_once __DIR__ . '/../config/database.php';
