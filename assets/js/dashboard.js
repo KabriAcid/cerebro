@@ -62,6 +62,15 @@ function submitCareer() {
   );
 }
 
+document.getElementById("userPrompt").addEventListener("keydown", function (e) {
+  // Submit on Enter (without Shift)
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    submitPrompt();
+  }
+});
+
+
 function submitPrompt() {
   const userPromptEl = document.getElementById("userPrompt");
   const chatContainer = document.getElementById("chatContainer");

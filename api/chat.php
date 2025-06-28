@@ -35,8 +35,8 @@ try {
     $payload = [
         "model" => "mistralai/mistral-7b-instruct:free",
         "messages" => $messages,
-        "temperature" => 0.9,
-        "max_tokens" => 512
+        "temperature" => 0.7,
+        "max_tokens" => 250
     ];
 
     // Initialize cURL
