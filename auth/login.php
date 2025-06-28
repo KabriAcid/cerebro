@@ -4,7 +4,6 @@ require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../util/utilities.php';
 require __DIR__ . '/../components/header.php';
 
-
 $success = '';
 if (isset($_GET['success']) && $_GET['success'] == 'true') {
     $success = "Registration Successful. Please log in.";
@@ -19,13 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$email || !$password) {
         $error = 'All fields are required.';
     } else {
-        // Try to find user in users table
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
     }
-    // User login
-    if ($user['password'] === md5($password)) {
+
+    if ($user && $user['password'] === md5($password)) {
         $_SESSION['user_id'] = $user['id'];
         header("Location: ../public/dashboard.php");
         exit;
@@ -39,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php require __DIR__ . '/../components/navbar.php'; ?>
     <main class="container-fluid py-5">
         <div class="container text-center mt-5">
-            <h3 class="display-4 fw-bold gradient-text">Login to your account</h1>
+            <h3 class="display-4 fw-bold gradient-text">Login to your account</h3>
         </div>
         <div class="container d-flex align-items-center justify-content-center mt-3">
             <div class="p-4" style="max-width: 600px; width: 100%;">
@@ -69,16 +67,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
         </div>
-        <!-- Loader Overlay -->
-        <div id="loaderOverlay" class="loader-overlay d-none">
-            <div class="loader-content">
-                <img src="../assets/img/logo.png" alt="App Logo" class="loader-logo">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        </div>
     </main>
+
+    <!-- Loader Overlay -->
+    <div id="loaderOverlay" class="loader-overlay d-none">
+        <div class="loader-content">
+            <img src="../assets/img/logo.png" alt="App Logo" class="loader-logo">
+        </div>
+    </div>
+
     <script>
         document.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault(); // Prevent the default form submission
@@ -91,6 +88,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             setTimeout(() => {
                 this.submit(); // Submit the form after the delay
             }, 2000); // 2-second delay
+        });
+        window.addEventListener("load", () => {
+            // Create a new URL object based on the current location
+            const url = new URL(window.location);
+
+            // Remove 'success' parameter from the URL
+            url.searchParams.delete("success");
+
+            // Update the URL in the browser without reloading
+            window.history.replaceState(null, null, url.pathname + url.search);
         });
     </script>
 </body>
