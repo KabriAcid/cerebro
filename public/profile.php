@@ -78,98 +78,25 @@ $user = get_user_info($pdo, $_SESSION['user_id'] ?? null);
             </ul>
         </section>
     </main>
-
-    <!-- Modals -->
-    <!-- Edit Name Modal -->
-    <div class="modal fade" id="editNameModal" tabindex="-1" aria-labelledby="editNameModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editNameModalLabel">Edit Name</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="text" class="form-control" placeholder="Enter your name" value="<?= htmlspecialchars($user['username']) ?? '' ?>">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save</button>
-                </div>
-            </div>
+    <!-- Custom Modal -->
+    <div id="customModal" class="custom-modal">
+        <div class="custom-modal-content rounded-top shadow">
+            <div id="customModalBody"></div>
         </div>
     </div>
+    <script>
+        function openCustomModal(modalId) {
+            const modalContent = document.getElementById(modalId).innerHTML;
+            document.getElementById('customModalBody').innerHTML = modalContent;
+            document.getElementById('customModal').classList.add('show');
+        }
 
-    <!-- Edit Email Modal -->
-    <div class="modal fade" id="editEmailModal" tabindex="-1" aria-labelledby="editEmailModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editEmailModalLabel">Edit Email</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="email" class="form-control" placeholder="Enter your email" value="<?= htmlspecialchars($user['email']) ?? '' ?>">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
+        function closeCustomModal() {
+            document.getElementById('customModal').classList.remove('show');
+        }
+    </script>
 
-    <!-- Edit Password Modal -->
-    <div class="modal fade" id="editPasswordModal" tabindex="-1" aria-labelledby="editPasswordModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editPasswordModalLabel">Change Password</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="password" class="form-control mb-3" placeholder="Enter new password">
-                    <input type="password" class="form-control mb-3" placeholder="Confirm new password">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save Password</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Edit Phone Modal -->
-    <div class="modal fade" id="editPhoneModal" tabindex="-1" aria-labelledby="editPhoneModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editPhoneModalLabel">Edit Phone Number</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="text" class="form-control" placeholder="Enter your phone number" value="+62 872-456-7890">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Close Account Modal -->
-    <div class="modal fade" id="closeAccountModal" tabindex="-1" aria-labelledby="closeAccountModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="closeAccountModalLabel">Close My Account</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to close your account? This action cannot be undone.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger">Close Account</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
