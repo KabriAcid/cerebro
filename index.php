@@ -1,10 +1,5 @@
 <?php
 require __DIR__ . '/util/utilities.php';
-$user = [
-    "name" => "M Shehu",
-    "username" => "Shehu",
-    "email" => "shehu@gmail.com",
-]
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,10 +42,10 @@ $user = [
                             <a class="nav-link active font-weight-bold" href="index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link font-weight-bold" href="#contact">Contact</a>
+                            <a class="nav-link font-weight-bold" href="public/contact.php">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link font-weight-bold" href="#about">About</a>
+                            <a class="nav-link font-weight-bold" href="public/about.php">About</a>
                         </li>
                     </ul>
                 </div>

@@ -81,7 +81,7 @@ $user = get_user_info($pdo, $_SESSION['user_id'] ?? null);
                     </svg>
                 </button>
             </div>
-            <p class="info-text">This is just an AI assistant not some mental health professional</p>
+            <p id="info-text">This AI assistant is not a licensed mental health professional.</p>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
