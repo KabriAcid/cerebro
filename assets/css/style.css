@@ -49,41 +49,47 @@ body {
   cursor: pointer;
   transition: box-shadow 0.2s ease;
 }
+.avatar:hover {
+  border: 2px solid rgba(255, 218, 246, 0.787);
+  outline: 3px solid rgba(255, 202, 242, 0.787);
+  box-sizing: border-box;
+}
 
 /* Dropdown container placement */
 .dropdown-container {
   position: relative;
-  display: inline-block;
 }
 
-/* Fix for overflow: position relative to avatar container */
+/* Dropdown menu adjustments */
 .dropdown-menu {
+  display: none; /* Initially hidden */
   position: absolute;
-  top: 48px; /* Below the avatar */
-  right: 0; /* Align with avatar edge */
+  top: 48px;
+  right: 0;
   background-color: var(--white);
   border-radius: var(--round-2);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  min-width: 240px;
+  max-width: 240px;
   overflow: hidden;
   padding: 8px 0;
   z-index: 999;
 }
 
-/* Dropdown header */
-.dropdown-header {
-  padding: 12px 16px;
-  font-weight: 600;
-  color: var(--dark);
-  font-size: 0.9rem;
-  border-bottom: 1px solid #eaeaea;
-  background-color: #fafafa;
+.dropdown-menu.show {
+  display: block; /* Show when toggled */
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Dropdown email */
-.dropdown-email {
-  color: var(--primary-dark);
-  font-size: 0.85rem;
+/* Fade-in animation for dropdown */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Dropdown links */
@@ -100,7 +106,6 @@ body {
   background-color: var(--gray);
   color: var(--primary);
 }
-
 .nav-link.active {
   color: var(--primary) !important;
   font-weight: 600;
@@ -224,7 +229,7 @@ body {
 .modal-content {
   border-radius: var(--round-3);
   padding: 20px;
-  background-color: var(--white);
+  background-color: var(--bg-color);
 }
 
 .modal-header {
