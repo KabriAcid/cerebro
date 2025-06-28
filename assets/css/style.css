@@ -50,9 +50,12 @@ body {
 }
 
 .avatar {
+  border: 2px solid #fff6fd;
+  outline: 2px solid rgba(255, 250, 254, 0.63);
   width: 45px;
   height: 45px;
   border-radius: var(--round-full);
+  box-shadow: 3px 3px 22px #ddd;
   cursor: pointer;
 }
 
@@ -133,6 +136,11 @@ body {
 }
 .submit-btn:hover {
   background-color: var(--primary-dark);
+}
+
+.input-field, .submit-btn:focus {
+  outline: none;
+  border: none;
 }
 
 .secondary-btn,
@@ -307,8 +315,8 @@ body {
 /* Typing animation */
 .bot-typing {
   font-style: italic;
-  color: #666;
-  background-color: #f1f1f1;
+  color: var(--dark);
+  background-color: #fff;
   animation: blink 1s infinite ease-in-out;
 }
 

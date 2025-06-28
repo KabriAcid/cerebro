@@ -62,7 +62,7 @@ try {
 
         // Custom error message for network issues
         if (strpos($errorMessage, 'Could not resolve host') !== false) {
-            echo json_encode(['success' => false, 'message' => 'Network error: Unable to connect to the server. Please check your internet connection.']);
+            echo json_encode(['success' => false, 'network_error' => true, 'message' => 'Network error: Unable to connect to the server. Please check your internet connection.']);
         } else {
             echo json_encode(['success' => false, 'message' => 'cURL error: ' . $errorMessage]);
         }
@@ -77,7 +77,7 @@ try {
     $result = json_decode($response, true);
 
     // Extract the response message
-    $responseMessage = $result['choices'][0]['message']['content'] ?? "No response received.";
+    $responseMessage = $result['choices'][0]['message']['content'] ?? "You have exhaused your free trial.";
 
     // Save chat into database
     $stmt = $pdo->prepare("INSERT INTO chat_logs (user_id, prompt, response, model) VALUES (?, ?, ?, ?)");
