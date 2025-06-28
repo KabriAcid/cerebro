@@ -76,6 +76,7 @@ $user = get_user_info($pdo, $user_id);
                         </svg>
                     </button>
                 </div>
+                <p class="text-xs text-secondary my-3 text-center">This chatbot is not a substitute for professional help.</p>
             </form>
         </section>
     </main>

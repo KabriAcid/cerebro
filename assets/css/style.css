@@ -292,3 +292,32 @@ body {
   border: 2px solid var(--primary);
   background-color: var(--gray);
 }
+
+/* Intro Section Styling */
+.intro-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.intro-section h1 {
+  font-size: 2rem; /* Default font size */
+  color: var(--primary-dark);
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .intro-section h1 {
+    font-size: 1.5rem; /* Smaller font size for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-section h1 {
+    font-size: 1.2rem; /* Smaller font size for mobile devices */
+  }
+}
