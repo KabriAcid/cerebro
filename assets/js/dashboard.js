@@ -1,3 +1,9 @@
+function autoResize(textarea) {
+  textarea.style.height = "auto";
+  textarea.style.height = textarea.scrollHeight + "px";
+}
+
+
 let selectedCareer = "";
 
 // Set the first card as active by default
@@ -57,52 +63,82 @@ function submitCareer() {
 }
 
 function submitPrompt() {
-  const userPrompt = document.getElementById("userPrompt").value.trim();
+  const userPromptEl = document.getElementById("userPrompt");
   const chatContainer = document.getElementById("chatContainer");
+  const submitBtn = document.getElementById("submitBtn");
+  const infoText = document.getElementById("info-text");
+  const userPrompt = userPromptEl.value.trim();
 
-  if (!userPrompt) {
-    alert("Please enter a message.");
-    return;
-  }
+  if (!userPrompt) return;
 
-  // Append the user's message to the chat container
-  const userMessage = document.createElement("div");
-  userMessage.className = "user-message";
-  userMessage.innerHTML = userPrompt;
-  chatContainer.appendChild(userMessage);
+  // Hide info text if visible
+  if (infoText) infoText.style.display = "none";
 
-  // Show loader
-  const loader = document.createElement("div");
-  loader.className = "loader";
-  chatContainer.appendChild(loader);
+  // Disable input and button
+  userPromptEl.disabled = true;
+  submitBtn.disabled = true;
 
-  // Send AJAX request using the custom AJAX function
+  // Append user's message
+  const userMsg = document.createElement("div");
+  userMsg.className = "user-message align-self-end mb-2 p-2 rounded shadow-sm";
+  userMsg.textContent = userPrompt;
+  chatContainer.appendChild(userMsg);
+  scrollToBottom();
+
+  // Simulate typing bot response
+  const typing = document.createElement("div");
+  typing.className =
+    "bot-message bot-typing align-self-start mb-2 p-2 rounded shadow-sm";
+  typing.innerHTML = `<em>Typing...</em>`;
+  chatContainer.appendChild(typing);
+  scrollToBottom();
+
+  // AJAX request
   sendAjaxRequest(
     "../api/chat.php",
     "POST",
     { message: userPrompt },
     function (response) {
-      // Remove loader
-      chatContainer.removeChild(loader);
+      // Replace typing indicator with actual bot message
+      chatContainer.removeChild(typing);
 
-      // Append the chatbot's response to the chat container
-      const botMessage = document.createElement("div");
-      botMessage.className = "bot-message";
-      botMessage.innerHTML = response.message;
-      chatContainer.appendChild(botMessage);
+      const botMsg = document.createElement("div");
+      botMsg.className =
+        "bot-message align-self-start mb-2 p-2 rounded shadow-sm";
 
-      // Clear the input field for the next message
-      document.getElementById("userPrompt").value = "";
+      // Use marked.js for markdown rendering
+      if (response.message) {
+        botMsg.innerHTML = marked.parse(response.message);
+      } else {
+        botMsg.textContent = "No response.";
+      }
+
+      chatContainer.appendChild(botMsg);
+      scrollToBottom();
+
+      // Reset form
+      userPromptEl.value = "";
+      autoResize(userPromptEl);
+      userPromptEl.disabled = false;
+      submitBtn.disabled = false;
+      userPromptEl.focus();
     },
     function (error) {
-      // Remove loader
-      chatContainer.removeChild(loader);
+      chatContainer.removeChild(typing);
 
-      // Append the error message to the chat container
-      const errorMessage = document.createElement("div");
-      errorMessage.className = "bot-message";
-      errorMessage.innerHTML = `<strong>Error:</strong> ${error}`;
-      chatContainer.appendChild(errorMessage);
+      const errorMsg = document.createElement("div");
+      errorMsg.className = "bot-message text-danger";
+      errorMsg.textContent = "An error occurred: " + error;
+      chatContainer.appendChild(errorMsg);
+
+      userPromptEl.disabled = false;
+      submitBtn.disabled = false;
     }
   );
+}
+
+// Scroll to bottom of chat
+function scrollToBottom() {
+  const container = document.getElementById("chatContainer");
+  container.scrollTop = container.scrollHeight;
 }

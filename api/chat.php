@@ -70,6 +70,16 @@ try {
     // Extract the response message
     $responseMessage = $result['choices'][0]['message']['content'] ?? "No response received.";
 
+    // Save chat into database
+    $stmt = $pdo->prepare("INSERT INTO chat_logs (user_id, prompt, response, model) VALUES (?, ?, ?, ?)");
+    $stmt->execute([
+        $_SESSION['user_id'] ?? null,
+        $userPrompt,
+        $responseMessage,
+        $payload['model']
+    ]);
+
+
     echo json_encode(['success' => true, 'message' => $responseMessage]);
 } catch (Exception $e) {
     echo json_encode([
