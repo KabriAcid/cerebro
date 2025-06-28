@@ -33,7 +33,7 @@ $user = [
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-white bg-white shadow-sm" id="mainNavbar">
+        <nav class="navbar navbar-expand-lg navbar-white bg-white" id="mainNavbar">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.php">
                     <img src="assets/img/logo.png" class="favicon" alt="Logo">

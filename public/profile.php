@@ -31,7 +31,7 @@ $user = get_user_info($pdo, $_SESSION['user_id'] ?? null);
         <!-- Profile Picture Section -->
         <section class="profile-picture-section text-center mb-4">
             <div class="position-relative d-inline-block">
-                <img src="../assets/img/avatar.jpg" alt="Profile Picture" class="rounded-circle shadow" width="80" height="80">
+                <img src="../assets/img/default.png" alt="Profile Picture" class="rounded-circle shadow" width="80" height="80">
                 <!-- Camera Icon for Image Upload -->
                 <button class="btn primary position-absolute bottom-0 end-0 rounded-circle p-2" onclick="document.getElementById('avatarUpload').click()">
                     <!-- Svg for upload -->
@@ -70,7 +70,7 @@ $user = get_user_info($pdo, $_SESSION['user_id'] ?? null);
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="openCustomModal('editPhoneModal')">
                     Phone Number
-                    <span class="text-muted">+62 872-456-7890</span>
+                    <span class="text-muted"><?= htmlspecialchars($user['phone']) ?></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center text-danger cursor-pointer" onclick="openCustomModal('closeAccountModal')">
                     Close My Account
@@ -113,7 +113,7 @@ $user = get_user_info($pdo, $_SESSION['user_id'] ?? null);
     <!-- Edit Phone Modal -->
     <div id="editPhoneModal" class="d-none">
         <h6 class="mb-3 primary text-center">Edit Phone Number</h6>
-        <input type="text" class="input-field" name="phone" value="+62 872-456-7890">
+        <input type="text" class="input-field" name="phone" value="<?= htmlspecialchars($user['phone']) ?>" inputmode="numeric" maxlength="11">
         <button class="btn primary-btn mt-3" style="min-width: 100%;" onclick="updateModalContent('editPhone')">Save</button>
     </div>
 
@@ -147,22 +147,18 @@ $user = get_user_info($pdo, $_SESSION['user_id'] ?? null);
                 data[input.name || input.placeholder] = input.value;
             });
 
-            console.log('Action:', action); // Debug: Check the action
-            console.log('Data:', data); // Debug: Check the data being sent
-
             sendAjaxRequest(
                 `../api/update-profile.php?action=${action}`,
                 'POST',
                 data,
                 function(response) {
-                    console.log('Response:', response); // Debug: Check the response
                     alert(response.message || 'Update successful!');
-                    window.location.reload();
-                    closeCustomModal();
+                    if (response.success) {
+                        closeCustomModal();
+                    }
                 },
                 function(error) {
-                    console.error('Error:', error); // Debug: Check the error
-                    alert(error.error || 'An error occurred.');
+                    alert(error.message || 'An error occurred.');
                 }
             );
         }

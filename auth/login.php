@@ -69,7 +69,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
         </div>
-        </ma>
+        <!-- Loader Overlay -->
+        <div id="loaderOverlay" class="loader-overlay d-none">
+            <div class="loader-content">
+                <img src="../assets/img/logo.png" alt="App Logo" class="loader-logo">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>

@@ -2,7 +2,7 @@
 <header class="dashboard-navbar" style="position: relative;">
     <div class="dropdown-container">
         <div class="avatar-container">
-            <img src="../assets/img/avatar.jpg" alt="Avatar" class="avatar" />
+            <img src="../assets/img/default.png" alt="Avatar" class="avatar" />
         </div>
         <div class="dropdown-menu border-none" id="avatarDropdown">
             <div class="dropdown-header">
@@ -11,7 +11,7 @@
             <a href="../public/profile.php" class="dropdown-item">Profile</a>
             <a href="../public/settings.php" class="dropdown-item">Settings</a>
             <a href="../public/help.php" class="dropdown-item">Help</a>
-            <a href="../public/logout.php" class="dropdown-item">Log Out</a>
+            <a href="../auth/logout.php" class="dropdown-item">Log Out</a>
         </div>
     </div>
 </header>

@@ -24,7 +24,6 @@ try {
     $data = json_decode(file_get_contents('php://input'), true);
     if (!$data) {
         echo json_encode(['success' => false, 'message' => 'Invalid JSON payload.']);
-        http_response_code(400);
         exit;
     }
 
@@ -32,7 +31,6 @@ try {
     $action = $_GET['action'] ?? null;
     if (!$action) {
         echo json_encode(['success' => false, 'message' => 'Action parameter is required.']);
-        http_response_code(400);
         exit;
     }
 
@@ -45,7 +43,6 @@ try {
             $name = trim($data['name'] ?? '');
             if (empty($name)) {
                 echo json_encode(['success' => false, 'message' => 'Name cannot be empty.']);
-                http_response_code(400);
                 exit;
             }
 
@@ -59,7 +56,6 @@ try {
             $email = trim($data['email'] ?? '');
             if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 echo json_encode(['success' => false, 'message' => 'Invalid email address.']);
-                http_response_code(400);
                 exit;
             }
 
@@ -75,19 +71,16 @@ try {
 
             if (empty($newPassword) || empty($confirmPassword)) {
                 echo json_encode(['success' => false, 'message' => 'Password fields cannot be empty.']);
-                http_response_code(400);
                 exit;
             }
 
             if ($newPassword !== $confirmPassword) {
                 echo json_encode(['success' => false, 'message' => 'Passwords do not match.']);
-                http_response_code(400);
                 exit;
             }
 
             if (strlen($newPassword) < 8) {
                 echo json_encode(['success' => false, 'message' => 'Password must be at least 8 characters long.']);
-                http_response_code(400);
                 exit;
             }
 
@@ -103,7 +96,6 @@ try {
             $phone = trim($data['phone'] ?? '');
             if (empty($phone) || !preg_match('/^\+?[0-9]{10,15}$/', $phone)) {
                 echo json_encode(['success' => false, 'message' => 'Invalid phone number.']);
-                http_response_code(400);
                 exit;
             }
 
@@ -124,7 +116,6 @@ try {
 
         default:
             echo json_encode(['success' => false, 'message' => 'Invalid action.']);
-            http_response_code(400);
             exit;
     }
 } catch (Exception $e) {

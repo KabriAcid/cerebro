@@ -96,7 +96,7 @@ function submitPrompt() {
   // Show "Typing..." indicator
   const typing = document.createElement("div");
   typing.className = "bot-message bot-typing mb-5 p-2 rounded shadow-sm";
-  typing.innerHTML = `<em>Typing...</em>`;
+  typing.innerHTML = `<img src="../assets/img/logo.png" alt="App Logo" class="blinking-logo">`;
   chatContainer.appendChild(typing);
   scrollToBottom();
 
