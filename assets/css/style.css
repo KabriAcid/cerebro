@@ -36,65 +36,71 @@ body {
   width: 45px;
   height: 45px;
 }
-/* Dropdown Container Styling */
-.dropdown-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
+/* Avatar image */
+.avatar-container {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--round-full);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
 }
 
-/* Avatar Styling */
-.avatar-container {
+/* Dropdown container placement */
+.dropdown-container {
+  position: relative;
   display: inline-block;
 }
 
-.avatar {
-  border: 2px solid #fff6fd;
-  outline: 2px solid rgba(255, 250, 254, 0.63);
-  width: 45px;
-  height: 45px;
-  border-radius: var(--round-full);
-  box-shadow: 3px 3px 22px #ddd;
-  cursor: pointer;
-}
-
-/* Dropdown Menu Styling */
+/* Fix for overflow: position relative to avatar container */
 .dropdown-menu {
-  display: none;
   position: absolute;
-  top: 45px;
-  right: 50px;
+  top: 48px; /* Below the avatar */
+  right: 0; /* Align with avatar edge */
   background-color: var(--white);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: var(--round-2);
-  z-index: 1000;
-  width: 250px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  min-width: 240px;
+  overflow: hidden;
+  padding: 8px 0;
+  z-index: 999;
 }
 
-/* Dropdown Header Styling */
+/* Dropdown header */
 .dropdown-header {
-  padding: 10px 15px;
-  border-bottom: 1px solid var(--gray);
-  font-size: 0.9rem;
-  color: var(--primary-dark);
+  padding: 12px 16px;
   font-weight: 600;
+  color: var(--dark);
+  font-size: 0.9rem;
+  border-bottom: 1px solid #eaeaea;
+  background-color: #fafafa;
 }
 
-/* Dropdown Item Styling */
-.dropdown-item {
-  padding: 10px 15px;
-  text-decoration: none;
+/* Dropdown email */
+.dropdown-email {
   color: var(--primary-dark);
-  display: block;
+  font-size: 0.85rem;
+}
+
+/* Dropdown links */
+.dropdown-item {
+  padding: 12px 16px;
   font-size: 0.9rem;
-  transition: background-color 0.3s ease;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s ease;
 }
 
 .dropdown-item:hover {
   background-color: var(--gray);
   color: var(--primary);
 }
+
 .nav-link.active {
   color: var(--primary) !important;
   font-weight: 600;
