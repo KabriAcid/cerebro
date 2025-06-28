@@ -321,3 +321,18 @@ body {
     font-size: 1.2rem; /* Smaller font size for mobile devices */
   }
 }
+
+/* Response Container Styling */
+.response-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: var(--gray);
+  border-radius: var(--round-3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.response-message {
+  font-size: 1rem;
+  color: var(--primary-dark);
+  line-height: 1.5;
+}
