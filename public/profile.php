@@ -1,3 +1,4 @@
+<!-- filepath: c:\xampp\htdocs\cerebro\public\profile.php -->
 <?php
 session_start();
 require __DIR__ . '/../config/database.php';
@@ -48,11 +49,11 @@ $user = get_user_info($pdo, $_SESSION['user_id'] ?? null);
         <section class="personal-info-section mb-4">
             <h6 class="text-muted mb-3">PERSONAL INFORMATION</h6>
             <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-group-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#editNameModal">
                     Name
                     <span class="text-muted"><?= htmlspecialchars($user['username']) ?? 'User' ?></span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-group-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#editEmailModal">
                     Email
                     <span class="text-muted"><?= htmlspecialchars($user['email']) ?? 'N/A' ?></span>
                 </li>
@@ -63,20 +64,112 @@ $user = get_user_info($pdo, $_SESSION['user_id'] ?? null);
         <section class="account-section">
             <h6 class="text-muted mb-3">ACCOUNT</h6>
             <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-group-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#editPasswordModal">
                     Password
                     <span class="text-muted">••••••••</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-group-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#editPhoneModal">
                     Phone Number
                     <span class="text-muted">+62 872-456-7890</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center text-danger">
+                <li class="list-group-item d-flex justify-content-between align-items-center text-danger" data-bs-toggle="modal" data-bs-target="#closeAccountModal">
                     Close My Account
                 </li>
             </ul>
         </section>
     </main>
+
+    <!-- Modals -->
+    <!-- Edit Name Modal -->
+    <div class="modal fade" id="editNameModal" tabindex="-1" aria-labelledby="editNameModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editNameModalLabel">Edit Name</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" placeholder="Enter your name" value="<?= htmlspecialchars($user['username']) ?? '' ?>">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Email Modal -->
+    <div class="modal fade" id="editEmailModal" tabindex="-1" aria-labelledby="editEmailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editEmailModalLabel">Edit Email</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="email" class="form-control" placeholder="Enter your email" value="<?= htmlspecialchars($user['email']) ?? '' ?>">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Password Modal -->
+    <div class="modal fade" id="editPasswordModal" tabindex="-1" aria-labelledby="editPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editPasswordModalLabel">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="password" class="form-control mb-3" placeholder="Enter new password">
+                    <input type="password" class="form-control mb-3" placeholder="Confirm new password">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Phone Modal -->
+    <div class="modal fade" id="editPhoneModal" tabindex="-1" aria-labelledby="editPhoneModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editPhoneModalLabel">Edit Phone Number</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" placeholder="Enter your phone number" value="+62 872-456-7890">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Close Account Modal -->
+    <div class="modal fade" id="closeAccountModal" tabindex="-1" aria-labelledby="closeAccountModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="closeAccountModalLabel">Close My Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to close your account? This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger">Close Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
