@@ -49,11 +49,11 @@ $user = get_user_info($pdo, $_SESSION['user_id'] ?? null);
         <section class="personal-info-section mb-4">
             <h6 class="text-muted mb-3">PERSONAL INFORMATION</h6>
             <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#editNameModal">
+                <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="openCustomModal('editNameModal')">
                     Name
                     <span class="text-muted"><?= htmlspecialchars($user['username']) ?? 'User' ?></span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#editEmailModal">
+                <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="openCustomModal('editEmailModal')">
                     Email
                     <span class="text-muted"><?= htmlspecialchars($user['email']) ?? 'N/A' ?></span>
                 </li>
@@ -64,26 +64,57 @@ $user = get_user_info($pdo, $_SESSION['user_id'] ?? null);
         <section class="account-section">
             <h6 class="text-muted mb-3">ACCOUNT</h6>
             <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#editPasswordModal">
+                <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="openCustomModal('editPasswordModal')">
                     Password
                     <span class="text-muted">••••••••</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#editPhoneModal">
+                <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="openCustomModal('editPhoneModal')">
                     Phone Number
                     <span class="text-muted">+62 872-456-7890</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center text-danger" data-bs-toggle="modal" data-bs-target="#closeAccountModal">
+                <li class="list-group-item d-flex justify-content-between align-items-center text-danger cursor-pointer" onclick="openCustomModal('closeAccountModal')">
                     Close My Account
                 </li>
             </ul>
         </section>
     </main>
+
     <!-- Custom Modal -->
-    <div id="customModal" class="custom-modal">
-        <div class="custom-modal-content rounded-top shadow">
-            <div id="customModalBody"></div>
+    <div id="customModal" class="custom-modal" onclick="closeCustomModal()">
+        <div class="custom-modal-content rounded-top shadow" onclick="event.stopPropagation()">
+            <div id="customModalBody" class="position-relative"></div>
         </div>
     </div>
+
+
+    <!-- Modal Content -->
+    <div id="editNameModal" class="d-none">
+        <h6 class="mb-3 primary text-center">Edit Name</h6>
+        <input type="text" class="input-field" value="<?= htmlspecialchars($user['username']) ?? '' ?>">
+        <button class="btn primary-btn mt-3">Save</button>
+    </div>
+    <div id="editEmailModal" class="d-none">
+        <h6 class="mb-3 primary text-center">Edit Email</h6>
+        <input type="email" class="input-field" value="<?= htmlspecialchars($user['email']) ?? '' ?>">
+        <button class="btn primary-btn mt-3">Save</button>
+    </div>
+    <div id="editPasswordModal" class="d-none">
+        <h6 class="mb-3 primary text-center">Change Password</h6>
+        <input type="password" class="input-field mb-2" placeholder="New Password">
+        <input type="password" class="input-field mb-2" placeholder="Confirm Password">
+        <button class="btn primary-btn mt-3">Save</button>
+    </div>
+    <div id="editPhoneModal" class="d-none">
+        <h6 class="mb-3 primary text-center">Edit Phone Number</h6>
+        <input type="text" class="input-field" value="+62 872-456-7890">
+        <button class="btn primary-btn mt-3">Save</button>
+    </div>
+    <div id="closeAccountModal" class="d-none">
+        <h6 class="mb-3 primary text-center">Close My Account</h6>
+        <p>Are you sure you want to close your account? This action cannot be undone.</p>
+        <button class="btn btn-danger mt-3">Close Account</button>
+    </div>
+
     <script>
         function openCustomModal(modalId) {
             const modalContent = document.getElementById(modalId).innerHTML;
@@ -94,9 +125,30 @@ $user = get_user_info($pdo, $_SESSION['user_id'] ?? null);
         function closeCustomModal() {
             document.getElementById('customModal').classList.remove('show');
         }
-    </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        function updateModalContent(action) {
+            const modalBody = document.getElementById('customModalBody');
+            const inputs = modalBody.querySelectorAll('input');
+            const data = {};
+
+            inputs.forEach(input => {
+                data[input.name || input.placeholder] = input.value;
+            });
+
+            sendAjaxRequest(
+                `../api/update-profile.php?action=${action}`,
+                'POST',
+                data,
+                function(response) {
+                    alert(response.message || 'Update successful!');
+                    closeCustomModal();
+                },
+                function(error) {
+                    alert(error.error || 'An error occurred.');
+                }
+            );
+        }
+    </script>
 </body>
 
 </html>
