@@ -101,6 +101,7 @@ require __DIR__ . '/../components/header.php';
             }
         }
     </script>
+    <script src="../assets/js/script.js"></script>
 </body>
 
 </html>

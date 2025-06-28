@@ -508,7 +508,7 @@ textarea.input-field:disabled {
 }
 
 .accordion-header:hover {
-    background-color: var(--light-gray);
+    color: var(--primary);
 }
 
 .accordion-icon {
