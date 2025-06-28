@@ -62,13 +62,14 @@ function submitCareer() {
 }
 
 document.getElementById("userPrompt").addEventListener("keydown", function (e) {
-  // Submit on Enter (without Shift)
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
     submitPrompt();
   }
 });
 
+
+// Handle prompt submission
 function submitPrompt() {
   const userPromptEl = document.getElementById("userPrompt");
   const chatContainer = document.getElementById("chatContainer");
@@ -80,8 +81,9 @@ function submitPrompt() {
   // Hide intro text
   if (introText) introText.style.display = "none";
 
-  // Clear input
+  // Clear input and disable temporarily
   userPromptEl.value = "";
+  userPromptEl.disabled = true;
   autoResize(userPromptEl);
 
   // Add user message
@@ -91,60 +93,86 @@ function submitPrompt() {
   chatContainer.appendChild(userMsg);
   scrollToBottom();
 
-  // Add "Typing..." indicator
+  // Show "Typing..." indicator
   const typing = document.createElement("div");
-  typing.className = "bot-message bot-typing mb-2 p-2 rounded shadow-sm";
+  typing.className = "bot-message bot-typing mb-5 p-2 rounded shadow-sm";
   typing.innerHTML = `<em>Typing...</em>`;
   chatContainer.appendChild(typing);
   scrollToBottom();
 
-  sendAjaxRequest(
-    "../api/chat.php",
-    "POST",
-    { message: userPrompt },
-    function (response) {
-      chatContainer.removeChild(typing);
+  // AJAX with timeout
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "../api/chat.php", true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.timeout = 10000;
 
-      // Markdown to HTML
-      let parsedHTML = "";
-      try {
-        parsedHTML = marked.parse(response.message || "No response.");
-      } catch {
-        parsedHTML = response.message || "No response.";
-      }
+  xhr.onload = function () {
+    chatContainer.removeChild(typing);
+    userPromptEl.disabled = false;
+
+    if (xhr.status >= 200 && xhr.status < 300) {
+      const response = JSON.parse(xhr.responseText);
+
+      const rawHTML = marked.parse(response.message || "No response.");
+      const sanitizedHTML = DOMPurify.sanitize(rawHTML); // Optional for security
 
       // Create bot message container
       const botMsg = document.createElement("div");
       botMsg.className = "bot-message mb-5 p-2 rounded shadow-sm";
-      botMsg.innerHTML = ""; // Start empty
+      botMsg.innerHTML = "";
       chatContainer.appendChild(botMsg);
 
-      // Type HTML one character at a time (keeping structure)
+      // Typing effect for parsed HTML
       let index = 0;
-
       const typingEffect = setInterval(() => {
-        botMsg.innerHTML = parsedHTML.slice(0, index + 1);
+        botMsg.innerHTML = sanitizedHTML.slice(0, index + 1);
         index++;
         scrollToBottom();
 
-        if (index >= parsedHTML.length) {
+        if (index >= sanitizedHTML.length) {
           clearInterval(typingEffect);
         }
-      }, 10); // Speed per character
-    },
-    function (error) {
-      chatContainer.removeChild(typing);
-
-      const errorMsg = document.createElement("div");
-      errorMsg.className = "bot-message text-danger";
-      errorMsg.textContent = "An error occurred: " + error;
-      chatContainer.appendChild(errorMsg);
-
-      const spacer = document.createElement("div");
-      spacer.style.height = "20px";
-      chatContainer.appendChild(spacer);
-
-      scrollToBottom();
+      }, 8);
+    } else {
+      handleError("Server error: " + xhr.status);
     }
-  );
+  };
+
+  xhr.onerror = function () {
+    chatContainer.removeChild(typing);
+    userPromptEl.disabled = false;
+    handleError("Network error occurred. Please check your connection.");
+  };
+
+  xhr.ontimeout = function () {
+    chatContainer.removeChild(typing);
+    userPromptEl.disabled = false;
+    handleError("Request timed out. Please try again.");
+  };
+
+  xhr.send(JSON.stringify({ message: userPrompt }));
+}
+
+// Show error nicely
+function handleError(errorMessage) {
+  const chatContainer = document.getElementById("chatContainer");
+
+  const errorMsg = document.createElement("div");
+  errorMsg.className = "bot-message text-danger mb-5 p-2 rounded shadow-sm";
+  errorMsg.textContent = errorMessage;
+  chatContainer.appendChild(errorMsg);
+
+  const spacer = document.createElement("div");
+  spacer.style.height = "20px";
+  chatContainer.appendChild(spacer);
+
+  scrollToBottom();
+}
+
+// Scroll chat container to bottom
+function scrollToBottom() {
+  const chatContainer = document.getElementById("chatContainer");
+  setTimeout(() => {
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  }, 0);
 }

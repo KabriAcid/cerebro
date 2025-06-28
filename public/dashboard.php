@@ -40,6 +40,7 @@ require __DIR__ . '/../util/utilities.php';
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.5/dist/purify.min.js"></script>
     <script src="../assets/js/ajax.js"></script>
     <script src="../assets/js/dashboard.js"></script>
     <script src="../assets/js/script.js"></script>

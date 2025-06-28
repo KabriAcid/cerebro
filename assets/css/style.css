@@ -247,7 +247,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 70vh;
   text-align: center;
   padding: 20px;
   box-sizing: border-box;
@@ -277,7 +277,8 @@ body {
   flex-direction: column;
   gap: 12px;
   align-items: stretch;
-  padding: 1rem;
+  padding: 15px 20px;
+  margin-bottom: 20px;
 }
 
 /* User and Bot messages */
@@ -285,8 +286,7 @@ body {
 .bot-message {
   max-width: 80%;
   word-wrap: break-word;
-  padding: 20px;
-  line-height: 1.5;
+  line-height: 1.7;
   font-size: 0.95rem;
 }
 

@@ -30,7 +30,6 @@ try {
     // Chat message history
     $messages = getDefaultMentalHealthPrompt($userPrompt);
 
-
     // Payload
     $payload = [
         "model" => "mistralai/mistral-7b-instruct:free",
@@ -55,11 +54,21 @@ try {
 
     // Execute and parse
     $response = curl_exec($ch);
+
+    // Check for cURL errors
     if (curl_errno($ch)) {
-        echo json_encode(['success' => false, 'message' => 'cURL error: ' . curl_error($ch)]);
+        $errorMessage = curl_error($ch);
         curl_close($ch);
+
+        // Custom error message for network issues
+        if (strpos($errorMessage, 'Could not resolve host') !== false) {
+            echo json_encode(['success' => false, 'message' => 'Network error: Unable to connect to the server. Please check your internet connection.']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'cURL error: ' . $errorMessage]);
+        }
         exit;
     }
+
     curl_close($ch);
 
     // Log the raw response for debugging
@@ -78,7 +87,6 @@ try {
         $responseMessage,
         $payload['model']
     ]);
-
 
     echo json_encode(['success' => true, 'message' => $responseMessage]);
 } catch (Exception $e) {
