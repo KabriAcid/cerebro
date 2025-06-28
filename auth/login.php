@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Loader Overlay -->
     <div id="loaderOverlay" class="loader-overlay d-none">
         <div class="loader-content">
-            <img src="../assets/img/logo.png" alt="App Logo" class="loader-logo">
+            <img src="/cerebro/assets/img/logo.png" alt="App Logo" class="loader-logo">
         </div>
     </div>
 
