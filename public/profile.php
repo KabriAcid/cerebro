@@ -157,6 +157,7 @@ $user = get_user_info($pdo, $_SESSION['user_id'] ?? null);
                 function(response) {
                     console.log('Response:', response); // Debug: Check the response
                     alert(response.message || 'Update successful!');
+                    window.location.reload();
                     closeCustomModal();
                 },
                 function(error) {

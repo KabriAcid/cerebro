@@ -8,24 +8,32 @@ header('Content-Type: application/json');
 try {
     // Ensure the request method is POST
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        throw new Exception('Invalid request method.', 405);
+        echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+        http_response_code(405);
+        exit;
     }
 
     // Check if the user is authenticated
     if (!isset($_SESSION['user_id'])) {
-        throw new Exception('Unauthorized access.', 401);
+        echo json_encode(['success' => false, 'message' => 'Unauthorized access.']);
+        http_response_code(401);
+        exit;
     }
 
     // Decode the incoming JSON request
     $data = json_decode(file_get_contents('php://input'), true);
     if (!$data) {
-        throw new Exception('Invalid JSON payload.', 400);
+        echo json_encode(['success' => false, 'message' => 'Invalid JSON payload.']);
+        http_response_code(400);
+        exit;
     }
 
     // Validate the action parameter
     $action = $_GET['action'] ?? null;
     if (!$action) {
-        throw new Exception('Action parameter is required.', 400);
+        echo json_encode(['success' => false, 'message' => 'Action parameter is required.']);
+        http_response_code(400);
+        exit;
     }
 
     // Get the user ID
@@ -36,7 +44,9 @@ try {
         case 'editName':
             $name = trim($data['name'] ?? '');
             if (empty($name)) {
-                throw new Exception('Name cannot be empty.', 400);
+                echo json_encode(['success' => false, 'message' => 'Name cannot be empty.']);
+                http_response_code(400);
+                exit;
             }
 
             $stmt = $pdo->prepare("UPDATE users SET username = ? WHERE id = ?");
@@ -48,7 +58,9 @@ try {
         case 'editEmail':
             $email = trim($data['email'] ?? '');
             if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                throw new Exception('Invalid email address.', 400);
+                echo json_encode(['success' => false, 'message' => 'Invalid email address.']);
+                http_response_code(400);
+                exit;
             }
 
             $stmt = $pdo->prepare("UPDATE users SET email = ? WHERE id = ?");
@@ -62,15 +74,21 @@ try {
             $confirmPassword = trim($data['confirmPassword'] ?? '');
 
             if (empty($newPassword) || empty($confirmPassword)) {
-                throw new Exception('Password fields cannot be empty.', 400);
+                echo json_encode(['success' => false, 'message' => 'Password fields cannot be empty.']);
+                http_response_code(400);
+                exit;
             }
 
             if ($newPassword !== $confirmPassword) {
-                throw new Exception('Passwords do not match.', 400);
+                echo json_encode(['success' => false, 'message' => 'Passwords do not match.']);
+                http_response_code(400);
+                exit;
             }
 
             if (strlen($newPassword) < 8) {
-                throw new Exception('Password must be at least 8 characters long.', 400);
+                echo json_encode(['success' => false, 'message' => 'Password must be at least 8 characters long.']);
+                http_response_code(400);
+                exit;
             }
 
             $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
@@ -84,7 +102,9 @@ try {
         case 'editPhone':
             $phone = trim($data['phone'] ?? '');
             if (empty($phone) || !preg_match('/^\+?[0-9]{10,15}$/', $phone)) {
-                throw new Exception('Invalid phone number.', 400);
+                echo json_encode(['success' => false, 'message' => 'Invalid phone number.']);
+                http_response_code(400);
+                exit;
             }
 
             $stmt = $pdo->prepare("UPDATE users SET phone = ? WHERE id = ?");
@@ -103,9 +123,11 @@ try {
             break;
 
         default:
-            throw new Exception('Invalid action.', 400);
+            echo json_encode(['success' => false, 'message' => 'Invalid action.']);
+            http_response_code(400);
+            exit;
     }
 } catch (Exception $e) {
-    http_response_code($e->getCode() ?: 500);
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    http_response_code($e->getCode() ?: 500);
 }
