@@ -15,10 +15,10 @@ require __DIR__ . '/../util/utilities.php';
 
         <!-- Loader -->
         <div class="loader" id="loader" style="display: none;"></div>
-
-        <!-- Response container -->
-        <section class="response-container" id="responseContainer" style="display: none;">
-            <div class="response-message" id="responseMessage"></div>
+        
+        <!-- Chat container -->
+        <section class="chat-container" id="chatContainer">
+            <!-- Messages will be dynamically appended here -->
         </section>
 
         <!-- Form container -->
