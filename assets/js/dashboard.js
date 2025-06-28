@@ -77,29 +77,25 @@ function submitPrompt() {
 
   if (!userPrompt) return;
 
-  // Hide intro text if visible
+  // Hide intro text
   if (introText) introText.style.display = "none";
 
-  // Clear the input field immediately
+  // Clear input
   userPromptEl.value = "";
   autoResize(userPromptEl);
 
-  // Append user's message
+  // Add user message
   const userMsg = document.createElement("div");
   userMsg.className = "user-message mb-2 p-2 rounded shadow-sm";
   userMsg.textContent = userPrompt;
   chatContainer.appendChild(userMsg);
-
-  // Scroll to bottom immediately after appending user's message
   scrollToBottom();
 
-  // Simulate typing bot response
+  // Add "Typing..." indicator
   const typing = document.createElement("div");
   typing.className = "bot-message bot-typing mb-2 p-2 rounded shadow-sm";
   typing.innerHTML = `<em>Typing...</em>`;
   chatContainer.appendChild(typing);
-
-  // Scroll to bottom after appending typing indicator
   scrollToBottom();
 
   sendAjaxRequest(
@@ -107,28 +103,34 @@ function submitPrompt() {
     "POST",
     { message: userPrompt },
     function (response) {
-      // Remove typing indicator
       chatContainer.removeChild(typing);
+
+      // Markdown to HTML
+      let parsedHTML = "";
+      try {
+        parsedHTML = marked.parse(response.message || "No response.");
+      } catch {
+        parsedHTML = response.message || "No response.";
+      }
 
       // Create bot message container
       const botMsg = document.createElement("div");
       botMsg.className = "bot-message mb-5 p-2 rounded shadow-sm";
-
-      // Use marked.js to render markdown safely
-      try {
-        botMsg.innerHTML = marked.parse(response.message || "No response.");
-      } catch (error) {
-        botMsg.textContent = response.message || "No response.";
-      }
-
+      botMsg.innerHTML = ""; // Start empty
       chatContainer.appendChild(botMsg);
 
-      // Add spacer
-      const spacer = document.createElement("div");
-      spacer.style.height = "20px";
-      chatContainer.appendChild(spacer);
+      // Type HTML one character at a time (keeping structure)
+      let index = 0;
 
-      scrollToBottom();
+      const typingEffect = setInterval(() => {
+        botMsg.innerHTML = parsedHTML.slice(0, index + 1);
+        index++;
+        scrollToBottom();
+
+        if (index >= parsedHTML.length) {
+          clearInterval(typingEffect);
+        }
+      }, 10); // Speed per character
     },
     function (error) {
       chatContainer.removeChild(typing);
@@ -145,10 +147,4 @@ function submitPrompt() {
       scrollToBottom();
     }
   );
-}
-
-// Scroll to bottom of chat container
-function scrollToBottom() {
-  const chatContainer = document.getElementById("chatContainer");
-  chatContainer.scrollTop = chatContainer.scrollHeight;
 }
