@@ -15,20 +15,20 @@ require __DIR__ . '/../util/utilities.php';
 
         <!-- Chat Container -->
         <section class="chat-container container my-4" id="chatContainer">
-            <!-- Messages will be appended here -->
+            <!-- Messages will be dynamically appended here -->
         </section>
 
         <!-- Form Container -->
         <section class="form-container container pb-4">
             <div class="d-flex align-items-center position-relative">
-                <!-- Textarea for input -->
+                <!-- Input Field -->
                 <textarea id="userPrompt"
                     class="form-control input-field me-2"
                     rows="1"
                     placeholder="Type your message here..."
                     oninput="autoResize(this)"></textarea>
 
-                <!-- Submit button -->
+                <!-- Submit Button -->
                 <button class="submit-btn d-flex align-items-center justify-content-center"
                     onclick="submitPrompt()" id="submitBtn">
                     <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,13 +37,7 @@ require __DIR__ . '/../util/utilities.php';
                     </svg>
                 </button>
             </div>
-
-            <!-- Info Text -->
-            <p id="info-text">
-                This chatbot is not a substitute for professional help.
-            </p>
         </section>
-
     </main>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="../assets/js/ajax.js"></script>

@@ -74,32 +74,27 @@ document.getElementById("userPrompt").addEventListener("keydown", function (e) {
 function submitPrompt() {
   const userPromptEl = document.getElementById("userPrompt");
   const chatContainer = document.getElementById("chatContainer");
-  const submitBtn = document.getElementById("submitBtn");
-  const infoText = document.getElementById("info-text");
+  const introText = document.getElementById("introText");
   const userPrompt = userPromptEl.value.trim();
 
   if (!userPrompt) return;
 
-  // Hide info text if visible
-  if (infoText) infoText.style.display = "none";
-
-  // Disable input and button
-  userPromptEl.disabled = true;
-  submitBtn.disabled = true;
+  // Hide intro text if visible
+  if (introText) introText.style.display = "none";
 
   // Append user's message
   const userMsg = document.createElement("div");
-  userMsg.className = "user-message align-self-end mb-2 p-2 rounded shadow-sm";
+  userMsg.className = "user-message mb-2 p-2 rounded shadow-sm";
   userMsg.textContent = userPrompt;
   chatContainer.appendChild(userMsg);
-  scrollToBottom();
 
   // Simulate typing bot response
   const typing = document.createElement("div");
-  typing.className =
-    "bot-message bot-typing align-self-start mb-2 p-2 rounded shadow-sm";
+  typing.className = "bot-message bot-typing mb-2 p-2 rounded shadow-sm";
   typing.innerHTML = `<em>Typing...</em>`;
   chatContainer.appendChild(typing);
+
+  // Scroll to bottom
   scrollToBottom();
 
   // AJAX request
@@ -108,46 +103,51 @@ function submitPrompt() {
     "POST",
     { message: userPrompt },
     function (response) {
-      // Replace typing indicator with actual bot message
+      // Remove typing indicator
       chatContainer.removeChild(typing);
 
+      // Append bot's response
       const botMsg = document.createElement("div");
-      botMsg.className =
-        "bot-message align-self-start mb-2 p-2 rounded shadow-sm";
-
-      // Use marked.js for markdown rendering
-      if (response.message) {
-        botMsg.innerHTML = marked.parse(response.message);
-      } else {
-        botMsg.textContent = "No response.";
-      }
-
+      botMsg.className = "bot-message mb-2 p-2 rounded shadow-sm";
+      botMsg.innerHTML = response.message || "No response.";
       chatContainer.appendChild(botMsg);
-      scrollToBottom();
 
-      // Reset form
+      // Add spacing below the last response
+      const spacer = document.createElement("div");
+      spacer.style.height = "20px";
+      chatContainer.appendChild(spacer);
+
+      // Clear the input field
       userPromptEl.value = "";
       autoResize(userPromptEl);
-      userPromptEl.disabled = false;
-      submitBtn.disabled = false;
       userPromptEl.focus();
+
+      // Scroll to bottom
+      scrollToBottom();
     },
     function (error) {
+      // Remove typing indicator
       chatContainer.removeChild(typing);
 
+      // Append error message
       const errorMsg = document.createElement("div");
       errorMsg.className = "bot-message text-danger";
       errorMsg.textContent = "An error occurred: " + error;
       chatContainer.appendChild(errorMsg);
 
-      userPromptEl.disabled = false;
-      submitBtn.disabled = false;
+      // Add spacing below the last response
+      const spacer = document.createElement("div");
+      spacer.style.height = "20px";
+      chatContainer.appendChild(spacer);
+
+      // Scroll to bottom
+      scrollToBottom();
     }
   );
 }
 
-// Scroll to bottom of chat
+// Scroll to bottom of chat container
 function scrollToBottom() {
-  const container = document.getElementById("chatContainer");
-  container.scrollTop = container.scrollHeight;
+  const chatContainer = document.getElementById("chatContainer");
+  chatContainer.scrollTop = chatContainer.scrollHeight;
 }
