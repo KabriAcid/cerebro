@@ -4,15 +4,14 @@
         <div class="avatar-container">
             <img src="../assets/img/avatar.jpg" alt="Avatar" class="avatar" />
         </div>
-        <div class="dropdown-menu" id="avatarDropdown">
+        <div class="dropdown-menu border-none" id="avatarDropdown">
             <div class="dropdown-header">
-                <span class="dropdown-email">kabriacid01@gmail.com</span>
+                <span class="text-secondary">kabriacid01@gmail.com</span>
             </div>
-            <a href="../profile/edit-profile.php" class="dropdown-item">Upgrade Plan</a>
-            <a href="../settings.php" class="dropdown-item">Customize ChatGPT</a>
-            <a href="../settings.php" class="dropdown-item">Settings</a>
-            <a href="../help.php" class="dropdown-item">Help</a>
-            <a href="../logout.php" class="dropdown-item">Log Out</a>
+            <a href="../public/profile.php" class="dropdown-item">Profile</a>
+            <a href="../public/settings.php" class="dropdown-item">Settings</a>
+            <a href="../public/help.php" class="dropdown-item">Help</a>
+            <a href="../public/logout.php" class="dropdown-item">Log Out</a>
         </div>
     </div>
 </header>
