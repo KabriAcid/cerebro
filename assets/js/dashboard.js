@@ -58,26 +58,23 @@ function submitCareer() {
 
 function submitPrompt() {
   const userPrompt = document.getElementById("userPrompt").value.trim();
-  const introText = document.getElementById("introText");
-  const loader = document.getElementById("loader");
-  const responseContainer = document.getElementById("responseContainer");
-  const responseMessage = document.getElementById("responseMessage");
+  const chatContainer = document.getElementById("chatContainer");
 
   if (!userPrompt) {
     alert("Please enter a message.");
     return;
   }
 
-  // Append the user's message to the response container
+  // Append the user's message to the chat container
   const userMessage = document.createElement("div");
-  userMessage.className = "response-message";
-  userMessage.innerHTML = `<p class="text-secondary"><strong>You:</strong> ${userPrompt}</p>`;
-  responseContainer.appendChild(userMessage);
+  userMessage.className = "user-message";
+  userMessage.innerHTML = userPrompt;
+  chatContainer.appendChild(userMessage);
 
-  // Show loader and keep the button active
-  introText.style.display = "none";
-  loader.style.display = "block";
-  responseContainer.style.display = "block";
+  // Show loader
+  const loader = document.createElement("div");
+  loader.className = "loader";
+  chatContainer.appendChild(loader);
 
   // Send AJAX request using the custom AJAX function
   sendAjaxRequest(
@@ -85,25 +82,27 @@ function submitPrompt() {
     "POST",
     { message: userPrompt },
     function (response) {
-      loader.style.display = "none"; // Hide loader
+      // Remove loader
+      chatContainer.removeChild(loader);
 
-      // Append the chatbot's response to the response container
+      // Append the chatbot's response to the chat container
       const botMessage = document.createElement("div");
-      botMessage.className = "response-message";
-      botMessage.innerHTML = `<p class="text-primary"><strong>Bot:</strong> ${response.message}</p>`;
-      responseContainer.appendChild(botMessage);
+      botMessage.className = "bot-message";
+      botMessage.innerHTML = response.message;
+      chatContainer.appendChild(botMessage);
 
       // Clear the input field for the next message
       document.getElementById("userPrompt").value = "";
     },
     function (error) {
-      loader.style.display = "none"; // Hide loader
+      // Remove loader
+      chatContainer.removeChild(loader);
 
-      // Append the error message to the response container
+      // Append the error message to the chat container
       const errorMessage = document.createElement("div");
-      errorMessage.className = "response-message";
-      errorMessage.innerHTML = `<p class="text-danger"><strong>Error:</strong> ${error}</p>`;
-      responseContainer.appendChild(errorMessage);
+      errorMessage.className = "bot-message";
+      errorMessage.innerHTML = `<strong>Error:</strong> ${error}`;
+      chatContainer.appendChild(errorMessage);
     }
   );
 }
