@@ -4,9 +4,6 @@
             <a href="../index.php">
                 <img src="../assets/img/logo.png" class="favicon">
             </a>
-            <ul>
-                <li></li>
-            </ul>
         </div>
     </nav>
 </header>

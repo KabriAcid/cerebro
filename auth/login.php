@@ -84,19 +84,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             const loaderOverlay = document.getElementById('loaderOverlay');
             loaderOverlay.classList.remove('d-none');
 
-            // Simulate a delay before redirecting
             setTimeout(() => {
-                this.submit(); // Submit the form after the delay
-            }, 2000); // 2-second delay
+                this.submit();
+            }, 2000);
         });
         window.addEventListener("load", () => {
-            // Create a new URL object based on the current location
             const url = new URL(window.location);
-
-            // Remove 'success' parameter from the URL
             url.searchParams.delete("success");
-
-            // Update the URL in the browser without reloading
             window.history.replaceState(null, null, url.pathname + url.search);
         });
     </script>

@@ -1,0 +1,132 @@
+Generate a detailed project documentation for a final year project titled "Cerebro," which is an AI-powered chatbot platform. The documentation should follow standard academic and professional guidelines for final year projects and include all necessary sections.
+
+---
+
+### **Project Title**: Cerebro - An AI-Powered Chatbot Platform
+
+**Objective**: Create a comprehensive documentation for the project "Cerebro," which is an AI-powered chatbot platform. The documentation should include all features, implementation details, and necessary information to meet the standards of a final year project.
+
+---
+
+### **Key Features and Functionalities**
+
+1. **User Authentication**:
+   - Login and registration system with secure password hashing.
+   - Forgot password functionality.
+
+2. **Dashboard**:
+   - User-friendly dashboard for managing settings, chat history, and profile.
+
+3. **Chatbot Functionality**:
+   - AI-powered chatbot capable of responding to user queries.
+   - Integration with OpenRouter API for generating responses.
+   - Support for different AI models (e.g., GPT-3.5, Mistral).
+
+4. **Chat History**:
+   - Display of user chat logs with timestamps.
+   - Ability to view prompts, responses, and the AI model used.
+   - Option to delete chat history.
+
+5. **Settings**:
+   - Theme selection (e.g., light mode).
+   - Subscription details (e.g., Free Plan).
+   - Configurable `max_tokens` for AI responses.
+   - Notification toggle and other application settings.
+
+6. **Profile Management**:
+   - Edit user details such as name, email, phone number, and password.
+   - Close account functionality.
+
+7. **Loader Animation**:
+   - Custom loader animation with the app logo during login and other actions.
+
+8. **Responsive Design**:
+   - Fully responsive UI for desktop and mobile devices.
+
+---
+
+### **Implementation Details**
+
+1. **Technologies Used**:
+   - **Frontend**: HTML, CSS, JavaScript (with Bootstrap for styling).
+   - **Backend**: PHP (with PDO for database interactions).
+   - **Database**: MySQL.
+   - **APIs**: OpenRouter API for chatbot responses.
+
+2. **Database Schema**:
+   - Tables: `users`, `chat_logs`, `user_settings`, etc.
+   - Key columns: `id`, `user_id`, `prompt`, `response`, `model`, `created_at`.
+
+3. **Security Features**:
+   - Password hashing using `md5` (or recommend upgrading to `password_hash`).
+   - Session-based authentication.
+   - Input sanitization to prevent SQL injection and XSS attacks.
+
+4. **Error Handling**:
+   - Graceful error messages for invalid inputs.
+   - JSON responses for API errors.
+
+5. **Testing**:
+   - Unit testing for backend functions.
+   - Manual testing for UI responsiveness and functionality.
+
+---
+
+### **Documentation Structure**
+
+1. **Abstract**:
+   - A brief overview of the project, its purpose, and key features.
+
+2. **Introduction**:
+   - Problem statement.
+   - Objectives of the project.
+   - Scope and limitations.
+
+3. **System Design**:
+   - Architecture diagram.
+   - Database schema and ER diagram.
+   - Flowcharts for key processes (e.g., login, chatbot interaction).
+
+4. **Implementation**:
+   - Detailed explanation of each module (e.g., authentication, chatbot, settings).
+   - Code snippets for critical functionalities.
+
+5. **Features**:
+   - List and description of all features (as outlined above).
+
+6. **Testing and Validation**:
+   - Test cases for each feature.
+   - Results of manual and automated testing.
+
+7. **Challenges and Solutions**:
+   - Technical challenges faced during development.
+   - How these challenges were resolved.
+
+8. **Future Enhancements**:
+   - Suggestions for improving the project (e.g., adding voice input, multi-language support).
+
+9. **Conclusion**:
+   - Summary of the project and its impact.
+
+10. **References**:
+    - List of resources, APIs, and libraries used.
+
+11. **Appendices**:
+    - Screenshots of the application.
+    - Sample chat logs.
+    - Full database schema.
+
+---
+
+### **Additional Notes**
+
+- Use professional and academic language.
+- Include diagrams and visuals where applicable (e.g., architecture diagram, ER diagram).
+- Ensure the documentation is well-structured and easy to read.
+- Provide a table of contents at the beginning.
+- Highlight the innovative aspects of the project (e.g., AI integration, user-friendly design).
+
+---
+
+### **Expected Output**
+A complete project documentation in a structured format (e.g., Word or PDF) that can be submitted as part of a final year project. The documentation should be detailed enough to explain the project to someone unfamiliar with it.

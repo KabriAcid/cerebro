@@ -480,3 +480,52 @@ textarea.input-field:disabled {
         opacity: 0.5;
     }
 }
+
+/* Custom Accordion */
+.custom-accordion {
+    border: 1px solid var(--gray);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-item {
+    border-bottom: 1px solid var(--gray);
+}
+
+.accordion-item:last-child {
+    border-bottom: none;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: var(--white);
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+    background-color: var(--light-gray);
+}
+
+.accordion-icon {
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    background-color: var(--light-gray);
+    transition: max-height 0.3s ease;
+}
+
+.accordion-body p,
+.accordion-body ul {
+    margin: 15px 0;
+}
