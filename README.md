@@ -46,25 +46,25 @@ Cerebro is a web-based AI-powered chatbot platform designed to provide mental an
 ![Home Page](../screens/index.png)
 
 ### 2. **Register Page**
-![Register Page](screens/register.png)
+![Register Page](../screens/register.png)
 
 ### 3. **Login Page**
-![Login Page](screens/login.png)
+![Login Page](../screens/login.png)
 
 ### 4. **Dashboard**
-![Dashboard](screens/dashboard.png)
+![Dashboard](../screens/dashboard.png)
 
 ### 5. **Chatbot Interaction**
-![Chatbot Interaction](screens/chat.png)
+![Chatbot Interaction](../screens/chat.png)
 
 ### 6. **Settings Page**
-![Settings Page](screens/settings.png)
+![Settings Page](../screens/settings.png)
 
 ### 7. **Profile**
-![Profile Page](screens/profile.png)
+![Profile Page](../screens/profile.png)
 
 ### 8. **Chatbot History**
-![Chatbot History](screens/chat-history.png)
+![Chatbot History](/cerebro/screens/chat-history.png)
 
 ---
 
