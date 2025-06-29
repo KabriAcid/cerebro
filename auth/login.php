@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container d-flex align-items-center justify-content-center mt-3">
             <div class="p-4" style="max-width: 600px; width: 100%;">
                 <?php if ($error): ?>
-                    <div class="alert alert-danger text-center fw-bold"><?= htmlspecialchars($error) ?></div>
+                    <div class="alert-danger text-center fw-bold"><?= htmlspecialchars($error) ?></div>
                 <?php endif; ?>
                 <?php if ($success): ?>
                     <div class="text-success text-center fw-bold"><?= htmlspecialchars($success) ?></div>
