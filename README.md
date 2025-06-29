@@ -98,5 +98,19 @@ Cerebro is a web-based AI-powered chatbot platform designed to provide mental an
    ```bash
    git clone https://github.com/KabriAcid/cerebro.git
 
+### Contact
+For any inquiries or support, please contact us at:
+  - Email: kabriacid01@gmail.com
+  - Website: Cerebro.ai
+
+### License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+
+### Acknowledgments
+ - OpenRouter API for powering the chatbot.
+ - Bootstrap for responsive design.
+ - Figma for design inspiration.
+
 ### Design Inspiration
 https://www.figma.com/design/Cx6H2IpF7fcUpf7kgwU8x8/Chatia---AI-Chatbot-Mobile-App-UI-UX-Design-Template---Free-Landing-Page--Preview-?node-id=0-1&p=f&t=OSBT7QjQ8nO6PMYl-0
