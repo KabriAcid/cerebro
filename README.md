@@ -43,7 +43,7 @@ Cerebro is a web-based AI-powered chatbot platform designed to provide mental an
 ## 📸 Screenshots
 
 ### 1. **Home Page**
-![Home Page](screens/index.png)
+![Home Page](../screens/index.png)
 
 ### 2. **Register Page**
 ![Register Page](screens/register.png)
